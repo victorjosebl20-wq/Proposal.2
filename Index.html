@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Prom?</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        height:100vh;
+        overflow:hidden;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#ff8fb1,#ffdde1);
+        position:relative;
+    }
+
+    .hearts{
+        position:absolute;
+        width:100%;
+        height:100%;
+        overflow:hidden;
+        top:0;
+        left:0;
+        z-index:0;
+    }
+
+    .heart{
+        position:absolute;
+        color:white;
+        font-size:20px;
+        animation:float 8s linear infinite;
+        opacity:0.7;
+    }
+
+    @keyframes float{
+        0%{
+            transform:translateY(100vh) scale(0.5);
+        }
+        100%{
+            transform:translateY(-10vh) scale(1.2);
+        }
+    }
+
+    .card{
+        background:white;
+        width:90%;
+        max-width:500px;
+        border-radius:25px;
+        padding:40px 30px;
+        text-align:center;
+        box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        position:relative;
+        z-index:1;
+        animation:pop 0.6s ease;
+    }
+
+    @keyframes pop{
+        from{
+            transform:scale(0.7);
+            opacity:0;
+        }
+        to{
+            transform:scale(1);
+            opacity:1;
+        }
+    }
+
+    h1{
+        font-size:2.5rem;
+        color:#ff4d88;
+        margin-bottom:15px;
+    }
+
+    p{
+        font-size:1.1rem;
+        color:#444;
+        margin-bottom:30px;
+        line-height:1.6;
+    }
+
+    .buttons{
+        position:relative;
+        height:100px;
+    }
+
+    button{
+        padding:15px 30px;
+        border:none;
+        border-radius:50px;
+        font-size:1rem;
+        cursor:pointer;
+        transition:0.3s;
+        position:absolute;
+    }
+
+    #yesBtn{
+        background:#ff4d88;
+        color:white;
+        left:25%;
+        transform:translateX(-50%);
+    }
+
+    #yesBtn:hover{
+        transform:translateX(-50%) scale(1.1);
+    }
+
+    #noBtn{
+        background:#ddd;
+        color:#333;
+        right:25%;
+        transform:translateX(50%);
+    }
+
+    .final-message{
+        display:none;
+        margin-top:20px;
+        font-size:1.4rem;
+        color:#ff4d88;
+        font-weight:bold;
+        animation:fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn{
+        from{
+            opacity:0;
+        }
+        to{
+            opacity:1;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="card">
+    <h1>Hey Beautiful 💖</h1>
+
+    <p>
+        I was gonna ask you to prom in person…<br>
+        but I figured embarrassing myself online would be more memorable 😭
+        <br><br>
+        Soooo...
+        <br>
+        Will you go to prom with me? 🥹
+    </p>
+
+    <div class="buttons">
+        <button id="yesBtn">YES 💕</button>
+        <button id="noBtn">No 🙄</button>
+    </div>
+
+    <div class="final-message" id="finalMessage">
+        LET'S GOOOOO 💃🕺❤️
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const finalMessage = document.getElementById("finalMessage");
+
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 300;
+        const y = Math.random() * 200;
+
+        noBtn.style.top = `${y}px`;
+        noBtn.style.left = `${x}px`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+        finalMessage.style.display = "block";
+    });
+
+    // floating hearts
+    const heartsContainer = document.querySelector(".hearts");
+
+    function createHeart(){
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
+
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 8000);
+    }
+
+    setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
